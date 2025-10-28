@@ -75,24 +75,42 @@ public class StudentManager {
         if (findByName(name) != null) { System.out.println("Mahasiswa sudah ada."); return; }
 
         Student s = new Student(name);
-        // TODO: implement penambahan mahasiswa ke dalam students ArrayList dengan banyak score input dari user
+        // TODO: implement penambahan mahasiswa
+        // Hint: gunakan loop untuk input banyak score dari user, pakai method parseScore() dan addScore(), lalu tambahkan ke students ArrayList
         System.out.println("✅ Mahasiswa ditambahkan.");
     }
 
     private void listStudents() {
         if (students.isEmpty()) { System.out.println("Belum ada data."); return; }
         System.out.println("\n== Daftar Mahasiswa ==");
-        for (Student s : students) {
-            System.out.println("- " + s.infoLine());
-        }
+
+        // TODO: implementasi penampilan daftar mahasiswa beserta info singkatnya dengan memanggil method infoLine()
     }
 
     private void addScoreToStudent() {
         // TODO: implement penambahan score ke mahasiswa
+        // Hint: minta input nama mahasiswa, cari dengan findByName(), lalu minta input score baru dan tambahkan
     }
 
     private void editStudentScore() {
-        // TODO: implement edit score mahasiswa
+        System.out.print("Nama mahasiswa: ");
+        String name = input.nextLine().trim();
+        Student s = findByName(name);
+        if (s == null) { System.out.println("Mahasiswa tidak ditemukan."); return; }
+
+        List<Double> scores = s.getScores();
+        if (scores.isEmpty()) { System.out.println("Mahasiswa belum memiliki nilai."); return; }
+        for (int i = 0; i < scores.size(); i++) {
+            System.out.printf("%d) %.2f%n", i, scores.get(i));
+        }
+        System.out.print("Pilih index nilai yang akan diubah: ");
+        int idx = Integer.parseInt(input.nextLine().trim());
+
+        System.out.print("Nilai baru (0..100): ");
+        double newVal = parseScore(input.nextLine().trim());
+
+        s.editScore(idx, newVal);
+        System.out.println("✅ Nilai diperbarui.");
     }
 
     private void deleteStudentScore() {
@@ -104,7 +122,13 @@ public class StudentManager {
     }
 
     private void deleteStudent() {
-        // TODO: implement hapus mahasiswa
+        System.out.print("Nama mahasiswa yang dihapus: ");
+        String name = input.nextLine().trim();
+        Student s = findByName(name);
+        if (s == null) { System.out.println("Mahasiswa tidak ditemukan."); return; }
+
+        students.remove(s);
+        System.out.println("🗑️ Mahasiswa dihapus.");
     }
 
     private void classStats() {

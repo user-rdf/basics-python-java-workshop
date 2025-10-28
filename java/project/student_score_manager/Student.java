@@ -32,11 +32,12 @@ public class Student {
 
     public double getAverage() {
         // TODO: hitung rata-rata dari scores ArrayList, kembalikan 0 jika belum ada nilai
+        return 0.0;
     }
 
     public String getGrade() {
         double avg = getAverage();
-        // TODO: mapping grade berdasarkan average
+        // TODO: kembalikan grade berdasarkan kondisi average
         return "E";
     }
 
